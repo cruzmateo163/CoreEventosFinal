@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+	<header th:replace="/template :: header"></header>
+	<br>
+
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+
+	</div>
+
+	<div class="container">
+
+		<form class="form-inline" th:action="@{/}">
+			<div class="form-group mb-2">
+				<label>Filtrar: </label>
+			</div>
+			<div class="form-group mx-sm-3 mb-2">
+				<input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}"
+					placeholder="Digite el valor a buscar" required>
+			</div>
+			<input type="submit" class="btn btn-info mb-2" value="Buscar">
+			&nbsp;&nbsp;
+			<input type="button" class="btn btn-secondary mb-2" value="Limpiar" onclick="limpiarCampos()">
+		</form>
+		<br>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>ID Evento</th>
+					<th>Evento</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="inscripcion : ${inscripcion}">
+					<td scope="row" th:text="${inscripcion.idInscripcion}"></td>
+					<td th:text="${inscripcion.evento.idEvento}"></td>
+					<td th:text="${inscripcion.evento.nombre}"></td>
+					<td th:text="${inscripcion.usuario.nombre}"></td>
+					<td th:text="${inscripcion.usuario.apellido}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<br>
+	<br>
+	<script type="text/javascript">
+		function limpiarCampos() {
+			window.location = '/';
+		}
+	</script>
+
+
+	<footer th:replace="/template :: footer"></footer>
+</body>
+
+</html>
